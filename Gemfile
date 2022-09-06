@@ -9,5 +9,7 @@ group :development do
 end
 
 gem 'document', "~> 1.0", git: "https://github.com/ihsaneddin/document-builder", tag: "v1.2.0"
+gem 'grape_api', git: "https://github.com/ihsaneddin/grape_api", tag: "v1.0.0"
+gem 'support', git: "https://github.com/ihsaneddin/support", tag: "v1.0.0"
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
