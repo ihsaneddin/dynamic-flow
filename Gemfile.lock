@@ -16,7 +16,7 @@ GIT
 PATH
   remote: .
   specs:
-    dynamic_flow (1.0.0)
+    dynamic_flow (1.2.0)
       acts_as_list (~> 1.0)
       ancestry (~> 4.0)
       document

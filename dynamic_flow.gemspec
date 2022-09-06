@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "acts_as_list", "~> 1.0"
   spec.add_dependency "ancestry", "~> 4.0"
   spec.add_dependency "rgl", "~> 0.5"
-  spec.add_dependency 'document'
+  spec.add_dependency 'document', '~> 1.0'
   spec.add_dependency 'script_core'
   spec.add_dependency "mini_racer"
 end
