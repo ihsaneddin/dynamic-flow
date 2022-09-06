@@ -8,6 +8,6 @@ group :development do
   gem 'pg'
 end
 
-gem 'document', "~> 1.0", git: "https://github.com/ihsaneddin/document-builder"
+gem 'document', "~> 1.0", git: "https://github.com/ihsaneddin/document-builder", tag: "v1.1.0"
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
