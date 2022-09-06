@@ -1,0 +1,43 @@
+en:
+  dynamic_flow:
+    workflow:
+      invalid_message:
+        start_is_missing: must have start place
+        only_one_start: must have only one start place
+        end_is_missing: must have end place
+        only_one_end: must have only one end place
+        invalid_discrete_transition: must not have discrete transition
+        unreachable: "%{p1} can not reach %{p2}"
+        transition_unreachable: "%{t1} can not reach %{t2}"
+        deadlock: "has deadlock"
+        transition_deadlock: "has dead transition"
+        end_unreachable: "can not reach to the end place"
+    expression:
+      ruby:
+        error: "script has error : %{e}"
+      javascript:
+        error: "script has error : %{e}"
+    instance:
+      transition:
+        errors:
+          activation_guard: "the instance can not be created and activated as the workflow is invalid"
+          finish_guard: "the workflow is misconstructed"
+          can_not_be_canceled: "only active or suspended instance can be canceled"
+          can_not_be_finished_yet: "the instance can not be transition to finished state yet"
+          misconstructed: "The workflow net is misconstructed: Some parallel executions have not finished."
+    transition:
+      fire:
+        errors:
+          can_not_be_fired: "can not fire the transition if the task is not in enabled or started state"
+    task:
+     transition:
+        errors:
+          start_guard: "The task can not be started. only task with enabled state which owned by user or automatic/delayed automatic can be started"
+          is_instance_active?: "Instance have to be active"
+          is_transition_can_be_fired?: "Transition can not be fired for some reason, either it has not sufficient token or the arc is guarded"
+          finish_guard: "The task can not be finished, either the wrong owner or some other reason"
+          multiple_instance_finish_guard: "The task can not be finished, the condition is not yet passed"
+          general: "Event can not be invoked"
+
+
+

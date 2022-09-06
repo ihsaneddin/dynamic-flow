@@ -1,0 +1,163 @@
+class CreateDynamicFlowTables < ActiveRecord::Migration[6.0]
+  def change
+    create_table :dynamic_flow_workflows, force: :cascade do |t|
+      t.references :creator, { polymorphic: true }
+      t.string :name
+      t.text :description
+      t.boolean :is_valid, default: false
+      t.text :message
+      t.timestamps
+    end
+
+    create_table :dynamic_flow_arcs, force: :cascade do |t|
+      t.references :workflow
+      t.references :transition
+      t.references :place
+      t.integer :direction, default: 0, comment: "0-in, 1-out"
+      t.integer :guards_count, default: 0
+      t.timestamps
+    end
+
+    create_table :dynamic_flow_guards, force: :cascade do |t|
+      t.references :arc
+      t.references :workflow
+      t.references :form
+      t.text :query
+      t.text :expression
+      t.string :type
+      t.index ["arc_id"], name: "index_dynamic_flow_guards_on_arc_id"
+      t.index ["workflow_id"], name: "index_dynamic_flow_guards_on_workflow_id"
+      t.timestamps
+    end
+
+    create_table :dynamic_flow_places, force: :cascade do |t|
+      t.references :workflow
+      t.string :name
+      t.text :description
+      t.integer :order, default: 0
+      t.string :type
+      t.timestamps
+    end
+
+    create_table :dynamic_flow_transitions, force: :cascade do |t|
+      t.references :workflow
+      t.references :dynamic_assign_by, index: true
+      t.boolean :multiple_instance, default: false
+      t.text :finish_condition
+      t.string :name
+      t.text :description
+      t.integer :order, default: 0
+      t.timestamps
+    end
+
+    create_table :dynamic_flow_transition_triggers, force: :cascade do |t|
+      t.references :transition
+      t.references :sub_workflow, index: true
+      t.references :form
+      t.text :configuration
+      t.text :expression
+      t.string :type
+      t.timestamps
+    end
+
+    create_table :dynamic_flow_transition_trigger_assignment_candidates, force: :cascade do |t|
+      t.references :actor, index: { name: "dt_ttsc_p_u" }
+      t.references :transition_trigger, index: { name: "dt_ttsc_tt_u" }
+      t.timestamps
+    end
+
+    create_table :dynamic_flow_transition_static_assignments, force: :cascade do |t|
+      t.references :actor, index: { name: "dt_ttsa_p_u" }
+      t.references :transition, index: { name: "dt_ttsa_t_u" }
+      t.references :workflow, index: { name: "dt_ttsa_w_u" }
+      t.timestamps
+      t.index ['transition_id', 'actor_id'], name: 'df_tp_u', unique: true
+    end
+
+    create_table :dynamic_flow_tasks, force: :cascade do |t|
+      t.references :instance
+      t.references :workflow
+      t.references :transition
+      t.references :transition_trigger
+      t.references :parent
+      t.string :state
+      t.datetime :enabled_at, default: -> { 'NOW()' }
+      t.datetime :started_at
+      t.datetime :canceled_at
+      t.datetime :overriden_at
+      t.datetime :finished_at
+      t.datetime :deadline
+      t.datetime :trigger_time
+      t.boolean :forked, default: false
+      t.string :holding_user_id
+      t.integer :children_count, default: 0
+      t.integer :children_finished_count, default: 0
+      t.text :payload
+      t.timestamps
+    end
+
+    create_table :dynamic_flow_entries, force: :cascade do |t|
+      t.references :form
+      t.references :user
+      t.references :task
+      t.text :payload
+      t.timestamps
+    end
+
+    create_table :dynamic_flow_task_assignments, force: :cascade do |t|
+      t.references :actor
+      t.references :task
+      t.timestamps
+      t.index ['task_id', 'actor_id'], name: 'df_ta_tp_u', unique: true
+    end
+
+    create_table :dynamic_flow_actors, force: :cascade do |t|
+      t.references :context, { polymorphic: true }
+      t.string :name
+      t.timestamps
+      t.index ['context_type', 'context_id'], name: 'df_actors_on_context_type_and_context_id', unique: true
+    end
+
+    create_table :dynamic_flow_instances, force: :cascade do |t|
+      t.references :workflow, index: { name: "df_i_u" }
+      t.references :targetable, { polymorphic: true, index: false }
+      t.references :started_by_task, index: true
+      t.references :started_by, { polymorphic: true, index: false }
+      t.string :state
+      t.text :description
+      t.text :configuration
+      t.timestamps
+    end
+
+    create_table :dynamic_flow_instance_assignments, force: :cascade do |t|
+      t.references :instance
+      t.references :transition
+      t.references :actor
+      t.index ['instance_id' 'transition_id' 'actor_id'], name: "df_ia_u", unique: true
+      t.timestamps
+    end
+
+    create_table :dynamic_flow_tokens, force: :cascade do |t|
+      t.references :workflow
+      t.references :instance
+      t.references :targetable
+      t.references :place
+      t.string :state
+      t.references :locked_task
+      t.datetime :produced_at, default: -> { 'NOW()' }
+      t.datetime :locked_at
+      t.datetime :canceled_at
+      t.datetime :consumed_at
+      t.timestamps
+    end
+
+    create_table :dynamic_flow_messages, force: :cascade do |t|
+      t.references :workflow
+      t.references :context, polymorphic: true, index: false
+      t.string :event
+      t.text :message
+      t.timestamps
+    end
+
+  end
+end
