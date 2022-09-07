@@ -80,7 +80,7 @@ module DynamicFlow
 
     def callback_for att, key, &block
       return unless send(att).keys.include?(key.to_sym)
-      send(att)[key][:proc] = Proc.new
+      send(att)[key][:proc] = block
     end
 
     def perform_callback att, callback_name, class_name, payload, delayed

@@ -21,11 +21,11 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency "rails", "~> 6.1.3", ">= 6.1.3.1"
+  spec.add_dependency "rails", "~> 7.0.3"
   spec.add_dependency "acts_as_list", "~> 1.0"
   spec.add_dependency "ancestry", "~> 4.0"
   spec.add_dependency "rgl", "~> 0.5"
-  spec.add_dependency 'document', '~> 1.0'
+  spec.add_dependency 'document'
   spec.add_dependency 'script_core'
   spec.add_dependency "mini_racer"
 end
