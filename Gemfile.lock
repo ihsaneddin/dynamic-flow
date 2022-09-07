@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/ihsaneddin/document-builder
-  revision: bd243d853ba419f8ee8ab28cce3ffdc90e11fce6
+  revision: 6ecf8199b17a5c8e662c295ef921b14ca018237e
   tag: v2.0.0
   specs:
     document (2.0.0)
