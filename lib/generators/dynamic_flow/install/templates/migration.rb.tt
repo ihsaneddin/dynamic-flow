@@ -112,7 +112,7 @@ class CreateDynamicFlowTables < ActiveRecord::Migration[6.0]
     end
 
     create_table :dynamic_flow_actors, force: :cascade do |t|
-      t.references :context, { polymorphic: true }
+      t.references :context, polymorphic: true
       t.string :name
       t.timestamps
       t.index ['context_type', 'context_id'], name: 'df_actors_on_context_type_and_context_id', unique: true
@@ -120,9 +120,9 @@ class CreateDynamicFlowTables < ActiveRecord::Migration[6.0]
 
     create_table :dynamic_flow_instances, force: :cascade do |t|
       t.references :workflow, index: { name: "df_i_u" }
-      t.references :targetable, { polymorphic: true, index: false }
+      t.references :targetable, polymorphic: true, index: false
       t.references :started_by_task, index: true
-      t.references :started_by, { polymorphic: true, index: false }
+      t.references :started_by, polymorphic: true, index: false
       t.string :state
       t.text :description
       t.text :configuration
