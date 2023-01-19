@@ -1,21 +1,6 @@
 GIT
-  remote: https://github.com/ihsaneddin/document-builder
-  revision: 6ecf8199b17a5c8e662c295ef921b14ca018237e
-  tag: v2.0.0
-  specs:
-    document (2.0.0)
-      activeentity (>= 6.1.0)
-      mongoid
-      mongoid_search
-      options_model
-      rails (~> 7.0.3)
-      ranked-model (~> 0.4.7)
-      support
-      validates_timeliness (~> 6.0.0.alpha1)
-
-GIT
   remote: https://github.com/ihsaneddin/grape_api
-  revision: 29a94a96cb86aa9b1ff1646619ff6535e336dc9c
+  revision: 031bbc4133ad592d6f96948724ff13c00608ca7e
   tag: v2.0.0
   specs:
     grape_api (2.0.0)
@@ -26,10 +11,10 @@ GIT
 
 GIT
   remote: https://github.com/ihsaneddin/support
-  revision: e7db3a8db421c8c4be59ce8eb1e389e4bdb2f936
+  revision: 2fcabc67ace800061f04d3a6f12769d69accc4e1
   tag: v2.0.0
   specs:
-    support (1.0.0)
+    support (2.0.0)
       aasm
       activerecord-import
       fastimage (~> 2.2.3)
@@ -42,12 +27,27 @@ GIT
       shrine (~> 3.4.0)
 
 PATH
+  remote: ../document
+  specs:
+    document (2.0.0)
+      activeentity (>= 6.1.0)
+      keisan
+      mongoid
+      mongoid-geospatial
+      mongoid_search
+      options_model
+      rails (~> 7.0.3)
+      ranked-model (~> 0.4.7)
+      support
+      validates_timeliness (~> 6.0.0.alpha1)
+
+PATH
   remote: .
   specs:
-    dynamic_flow (1.2.0)
+    dynamic_flow (2.0.0)
       acts_as_list (~> 1.0)
       ancestry (~> 4.0)
-      document
+      document (>= 2.0.0)
       mini_racer
       rails (~> 7.0.3)
       rgl (~> 0.5)
@@ -56,7 +56,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.3.0)
+    aasm (5.4.0)
       concurrent-ruby (~> 1.0)
     actioncable (7.0.3.1)
       actionpack (= 7.0.3.1)
@@ -114,7 +114,7 @@ GEM
     activerecord (7.0.3.1)
       activemodel (= 7.0.3.1)
       activesupport (= 7.0.3.1)
-    activerecord-import (1.4.0)
+    activerecord-import (1.4.1)
       activerecord (>= 4.2)
     activestorage (7.0.3.1)
       actionpack (= 7.0.3.1)
@@ -136,33 +136,34 @@ GEM
       activerecord (>= 5.2.6)
     bson (4.15.0)
     builder (3.2.4)
+    cmath (1.0.0)
     concurrent-ruby (1.1.10)
     content_disposition (1.0.0)
     crass (1.0.6)
     digest (3.1.0)
-    down (5.3.1)
+    down (5.4.0)
       addressable (~> 2.8)
-    dry-container (0.10.1)
+    dry-core (1.0.0)
       concurrent-ruby (~> 1.0)
-    dry-core (0.8.1)
+      zeitwerk (~> 2.6)
+    dry-inflector (1.0.0)
+    dry-logic (1.5.0)
       concurrent-ruby (~> 1.0)
-    dry-inflector (0.3.0)
-    dry-logic (1.2.0)
+      dry-core (~> 1.0, < 2)
+      zeitwerk (~> 2.6)
+    dry-types (1.7.0)
       concurrent-ruby (~> 1.0)
-      dry-core (~> 0.5, >= 0.5)
-    dry-types (1.5.1)
-      concurrent-ruby (~> 1.0)
-      dry-container (~> 0.3)
-      dry-core (~> 0.5, >= 0.5)
-      dry-inflector (~> 0.1, >= 0.1.2)
-      dry-logic (~> 1.0, >= 1.0.2)
+      dry-core (~> 1.0, < 2)
+      dry-inflector (~> 1.0, < 2)
+      dry-logic (>= 1.4, < 2)
+      zeitwerk (~> 2.6)
     erubi (1.11.0)
     fast-stemmer (1.0.2)
     fastimage (2.2.6)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    grape (1.6.2)
+    grape (1.7.0)
       activesupport
       builder
       dry-types (>= 1.1)
@@ -179,6 +180,8 @@ GEM
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
+    keisan (0.9.1)
+      cmath (~> 1.0)
     libv8-node (16.10.0.0-x86_64-linux)
     loofah (2.18.0)
       crass (~> 1.0.2)
@@ -187,21 +190,23 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
     method_source (1.0.0)
-    mini_magick (4.11.0)
+    mini_magick (4.12.0)
     mini_mime (1.1.2)
     mini_racer (0.6.3)
       libv8-node (~> 16.10.0.0)
     minitest (5.16.3)
-    mongo (2.18.1)
+    mongo (2.18.2)
       bson (>= 4.14.1, < 5.0.0)
-    mongoid (8.0.2)
+    mongoid (8.0.3)
       activemodel (>= 5.1, < 7.1, != 7.0.0)
       mongo (>= 2.18.0, < 3.0.0)
       ruby2_keywords (~> 0.0.5)
+    mongoid-geospatial (5.1.0)
+      mongoid (>= 4.0.0)
     mongoid_search (0.4.0)
       fast-stemmer (~> 1.0.0)
       mongoid (>= 5.0.0)
-    msgpack (1.5.6)
+    msgpack (1.6.0)
     multi_json (1.15.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
@@ -228,11 +233,11 @@ GEM
       activemodel (>= 5, < 8)
       activesupport (>= 5, < 8)
       psych (>= 3.2)
-    pairing_heap (1.0.0)
+    pairing_heap (2.0.0)
     pg (1.4.3)
-    psych (4.0.5)
+    psych (5.0.2)
       stringio
-    public_suffix (5.0.0)
+    public_suffix (5.0.1)
     racc (1.6.0)
     rack (2.2.4)
     rack-accept (0.4.5)
@@ -266,12 +271,12 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
-    rake-compiler (1.2.0)
+    rake-compiler (1.2.1)
       rake
     ranked-model (0.4.8)
       activerecord (>= 4.2)
     rexml (3.2.5)
-    rgl (0.5.9)
+    rgl (0.5.10)
       pairing_heap (>= 0.3.0)
       rexml (~> 3.2, >= 3.2.4)
       stream (~> 0.5.3)
@@ -296,10 +301,10 @@ GEM
     spreadsheet (1.3.0)
       ruby-ole
     stream (0.5.5)
-    stringio (3.0.2)
+    stringio (3.0.4)
     strscan (3.0.4)
     thor (1.2.1)
-    timeliness (0.4.4)
+    timeliness (0.4.5)
     timeout (0.3.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)

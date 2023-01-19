@@ -8,7 +8,8 @@ group :development do
   gem 'pg'
 end
 
-gem 'document', git: "https://github.com/ihsaneddin/document-builder", tag: "v2.0.0"
+# gem 'document', git: "https://github.com/ihsaneddin/document-builder", tag: "v2.0.0"
+gem 'document', path: '../document'
 gem 'grape_api', git: "https://github.com/ihsaneddin/grape_api", tag: "v2.0.0"
 gem 'support', git: "https://github.com/ihsaneddin/support", tag: "v2.0.0"
 # To use a debugger
