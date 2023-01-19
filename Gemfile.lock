@@ -1,4 +1,21 @@
 GIT
+  remote: https://github.com/ihsaneddin/document-builder.git
+  revision: 3a073a6cb36230386205ee411e1cd978295dae8f
+  branch: upgrade/rails-7
+  specs:
+    document (2.0.0)
+      activeentity (>= 6.1.0)
+      keisan
+      mongoid
+      mongoid-geospatial
+      mongoid_search
+      options_model
+      rails (~> 7.0.3)
+      ranked-model (~> 0.4.7)
+      support
+      validates_timeliness (~> 6.0.0.alpha1)
+
+GIT
   remote: https://github.com/ihsaneddin/grape_api
   revision: 031bbc4133ad592d6f96948724ff13c00608ca7e
   tag: v2.0.0
@@ -25,21 +42,6 @@ GIT
       roo (~> 2.9.0)
       roo-xls
       shrine (~> 3.4.0)
-
-PATH
-  remote: ../document
-  specs:
-    document (2.0.0)
-      activeentity (>= 6.1.0)
-      keisan
-      mongoid
-      mongoid-geospatial
-      mongoid_search
-      options_model
-      rails (~> 7.0.3)
-      ranked-model (~> 0.4.7)
-      support
-      validates_timeliness (~> 6.0.0.alpha1)
 
 PATH
   remote: .
