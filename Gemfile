@@ -8,6 +8,8 @@ group :development do
   gem 'pg'
 end
 
+gem 'script_core', git: "https://github.com/ihsaneddin/script_core"
+
 # gem 'document', git: "https://github.com/ihsaneddin/document-builder", tag: "v2.0.0"
 gem 'document', github: "ihsaneddin/document-builder", branch: 'upgrade/rails-7'
 # gem 'document', path: '../document'
